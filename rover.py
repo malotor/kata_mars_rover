@@ -106,5 +106,3 @@ class Rover:
             'W': RoverAspectWest(self)
         }
         return aspects[aspect]
-
-
