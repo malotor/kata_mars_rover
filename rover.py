@@ -99,12 +99,12 @@ class Rover:
 
     def set_aspect_state(self,aspect):
 
-        if aspect == 'N':
-            return RoverAspectNorth(self)
-        elif aspect == 'S':
-            return RoverAspectSouth(self)
-        elif aspect == 'E':
-            return RoverAspectEast(self)
-        elif aspect == 'W':
-            return RoverAspectWest(self)
+        aspects = {
+            'N': RoverAspectNorth(self),
+            'S': RoverAspectSouth(self),
+            'E': RoverAspectEast(self),
+            'W': RoverAspectWest(self)
+        }
+        return aspects[aspect]
+
 

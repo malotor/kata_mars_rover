@@ -112,6 +112,17 @@ class RoverTest(unittest.TestCase):
         self.assertEqual(rover.get_position().y, 48)
 
 
+    def test_command_string(self):
+        rover = Rover(P(50,50),'N')
+        control = RemoteControl(rover)
+        commands = 'f'
+
+        control.execute(commands)
+
+        self.assertEqual(rover.get_position().x, 51)
+        self.assertEqual(rover.get_position().y, 50)
+
+
 if __name__ == '__main__':
     unittest.main()
 
