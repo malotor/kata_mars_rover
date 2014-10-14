@@ -15,6 +15,9 @@ class RoverAspectNorth:
         self.rover.position.y -= 1
 
     def turn_left(self):
+        self.rover.set_aspect("W")
+
+    def turn_right(self):
         self.rover.set_aspect("E")
 
 class RoverAspectSouth:
@@ -27,6 +30,13 @@ class RoverAspectSouth:
     def go_backward(self):
         self.rover.position.y += 1
 
+    def turn_left(self):
+        self.rover.set_aspect("E")
+
+    def turn_right(self):
+        self.rover.set_aspect("W")
+
+
 class RoverAspectEast:
     def __init__(self,rover):
         self.rover = rover
@@ -36,6 +46,12 @@ class RoverAspectEast:
 
     def go_backward(self):
         self.rover.position.x -= 1
+
+    def turn_left(self):
+        self.rover.set_aspect("N")
+
+    def turn_right(self):
+        self.rover.set_aspect("S")
 
 class RoverAspectWest:
     def __init__(self,rover):
@@ -47,14 +63,17 @@ class RoverAspectWest:
     def go_backward(self):
         self.rover.position.x += 1
 
+    def turn_left(self):
+        self.rover.set_aspect("S")
+
+    def turn_right(self):
+        self.rover.set_aspect("N")
+
 class Rover:
 
     def __init__(self,position,aspect):
         self.position = position
-        self.aspect = aspect;
-        self.state = self.set_aspect_state(aspect)
-
-
+        self.set_aspect(aspect);
 
     def get_position(self):
         return self.position
@@ -63,6 +82,7 @@ class Rover:
         return self.aspect
 
     def set_aspect(self, aspect):
+        self.state = self.set_aspect_state(aspect)
         self.aspect = aspect
 
     def go_forward(self):
@@ -74,9 +94,8 @@ class Rover:
     def turn_left(self):
         self.state.turn_left()
 
-    def get_aspect(self):
-
-        return self.aspect
+    def turn_right(self):
+        self.state.turn_right()
 
     def set_aspect_state(self,aspect):
 
