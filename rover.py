@@ -9,44 +9,49 @@ class RoverAspectNorth:
         self.rover = rover
 
     def go_forward(self):
-        self.rover.position.x += 1
+        self.rover.position.y += 1
 
+    def go_backward(self):
+        self.rover.position.y -= 1
 
 class RoverAspectSouth:
     def __init__(self,rover):
         self.rover = rover
 
     def go_forward(self):
-        self.rover.position.x -= 1
+        self.rover.position.y -= 1
+
+    def go_backward(self):
+        self.rover.position.y += 1
 
 class RoverAspectEast:
     def __init__(self,rover):
         self.rover = rover
 
     def go_forward(self):
-        self.rover.position.y += 1
+        self.rover.position.x += 1
+
+    def go_backward(self):
+        self.rover.position.x -= 1
 
 class RoverAspectWest:
     def __init__(self,rover):
         self.rover = rover
 
     def go_forward(self):
-        self.rover.position.y -= 1
+        self.rover.position.x -= 1
+
+    def go_backward(self):
+        self.rover.position.x += 1
 
 class Rover:
 
     def __init__(self,position,aspect):
         self.position = position
-        self.aspect = aspect
+        self.aspect = aspect;
+        self.state = self.set_aspect_state(aspect)
 
-        if self.aspect == 'N':
-            self.state = RoverAspectNorth(self)
-        elif self.aspect == 'S':
-            self.state = RoverAspectSouth(self)
-        elif self.aspect == 'E':
-            self.state = RoverAspectEast(self)
-        elif self.aspect == 'W':
-            self.state = RoverAspectWest(self)
+
 
     def get_position(self):
         return self.position
@@ -56,3 +61,22 @@ class Rover:
 
     def go_forward(self):
         self.state.go_forward()
+
+    def go_backward(self):
+        self.state.go_backward()
+
+    def get_aspect(self):
+
+        return self.aspect
+
+    def set_aspect_state(self,aspect):
+
+        if aspect == 'N':
+            return RoverAspectNorth(self)
+        elif aspect == 'S':
+            return RoverAspectSouth(self)
+        elif aspect == 'E':
+            return RoverAspectEast(self)
+        elif aspect == 'W':
+            return RoverAspectWest(self)
+

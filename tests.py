@@ -24,28 +24,49 @@ class RoverTest(unittest.TestCase):
     def test_rover_go_forward(self):
         rover = Rover(P(50,50),'N')
         rover.go_forward()
-        self.assertEqual(rover.get_position().x, 51)
+        self.assertEqual(rover.get_position().y, 51)
         rover.go_forward()
-        self.assertEqual(rover.get_position().x, 52)
+        self.assertEqual(rover.get_position().y, 52)
 
     def test_rover_go_forward_S(self):
         rover = Rover(P(50,50),'S')
         rover.go_forward()
-        self.assertEqual(rover.get_position().x, 49)
-        rover.go_forward()
-        self.assertEqual(rover.get_position().x, 48)
+        self.assertEqual(rover.get_position().y, 49)
+
     def test_rover_go_forward_E(self):
         rover = Rover(P(50,50),'E')
         rover.go_forward()
-        self.assertEqual(rover.get_position().y, 51)
-        rover.go_forward()
-        self.assertEqual(rover.get_position().y, 52)
+        self.assertEqual(rover.get_position().x, 51)
+
     def test_rover_go_forward_W(self):
         rover = Rover(P(50,50),'W')
         rover.go_forward()
+        self.assertEqual(rover.get_position().x, 49)
+
+
+
+    def test_rover_go_backward(self):
+        rover = Rover(P(50,50),'N')
+        rover.go_backward()
         self.assertEqual(rover.get_position().y, 49)
-        rover.go_forward()
-        self.assertEqual(rover.get_position().y, 48)
+
+    def test_rover_go_backward_S(self):
+        rover = Rover(P(50,50),'S')
+        rover.go_backward()
+        self.assertEqual(rover.get_position().y, 51)
+
+    def test_rover_go_backward_E(self):
+        rover = Rover(P(50,50),'E')
+        rover.go_backward()
+        self.assertEqual(rover.get_position().x, 49)
+
+    def test_rover_go_backward_W(self):
+        rover = Rover(P(50,50),'W')
+        rover.go_backward()
+        self.assertEqual(rover.get_position().x, 51)
+
+
+
 
 
 if __name__ == '__main__':
