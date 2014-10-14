@@ -8,8 +8,6 @@ from rover import Position as P
 # The following is the class in which all functions will be ran by unittest
 class RoverTest(unittest.TestCase):
 
-    def setUp(self):
-        self.rover = Rover(P(0,0),'N')
 
     # Functions beginning with "test" will be ran as a unit test.
     def test_create_rover(self):
