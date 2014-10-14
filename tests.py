@@ -1,5 +1,6 @@
 import unittest
 from rover import Rover
+from remote_control import RemoteControl
 
 from rover import Position as P
 
@@ -113,6 +114,7 @@ class RoverTest(unittest.TestCase):
 
 
     def test_command_string(self):
+
         rover = Rover(P(50,50),'N')
         control = RemoteControl(rover)
         commands = 'f'
