@@ -66,7 +66,12 @@ class RoverTest(unittest.TestCase):
         self.assertEqual(rover.get_position().x, 51)
 
 
-
+    def test_from_N_turn_left(self):
+        rover = Rover(P(50,50),'N')
+        rover.turn_left()
+        self.assertEqual(rover.get_position().x, 50)
+        self.assertEqual(rover.get_position().y, 50)
+        self.assertEqual(rover.get_aspect(), 'E')
 
 
 if __name__ == '__main__':
