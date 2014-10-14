@@ -115,14 +115,45 @@ class RoverTest(unittest.TestCase):
 
     def test_command_string(self):
 
-        rover = Rover(P(50,50),'N')
+        rover = Rover(P(0,0),'N')
         control = RemoteControl(rover)
-        commands = 'f'
+        control.execute('f')
 
-        control.execute(commands)
+        self.assertEqual(rover.get_position().x, 0)
+        self.assertEqual(rover.get_position().y, 1)
 
-        self.assertEqual(rover.get_position().x, 51)
-        self.assertEqual(rover.get_position().y, 50)
+    def test_command_other_string(self):
+
+        rover = Rover(P(0,0),'E')
+        control = RemoteControl(rover)
+        control.execute('f')
+
+        self.assertEqual(rover.get_position().x, 1)
+        self.assertEqual(rover.get_position().y, 0)
+
+        control.execute('b')
+
+        self.assertEqual(rover.get_position().x, 0)
+        self.assertEqual(rover.get_position().y, 0)
+
+        control.execute('ff')
+
+        self.assertEqual(rover.get_position().x, 2)
+        self.assertEqual(rover.get_position().y, 0)
+
+        control.execute('lfff')
+
+        self.assertEqual(rover.get_position().x, 2)
+        self.assertEqual(rover.get_position().y, 3)
+
+    def test_command_other_path(self):
+
+        rover = Rover(P(0,0),'N')
+        control = RemoteControl(rover)
+        control.execute('ffrff')
+
+        self.assertEqual(rover.get_position().x, 2)
+        self.assertEqual(rover.get_position().y, 2)
 
 
 if __name__ == '__main__':
