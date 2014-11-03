@@ -18,6 +18,10 @@ class CommandRight(Command):
     def execute(self):
         self.rover.turn_right()
 
+class CommandTopLef(Command):
+    def execute(self):
+        self.rover.top_left()
+
 class RemoteControl:
     def __init__(self,rover):
         self.rover = rover
@@ -25,7 +29,8 @@ class RemoteControl:
             'f': CommandForward(self.rover),
             'b': CommandBackward(self.rover),
             'l': CommandLeft(self.rover),
-            'r': CommandRight(self.rover)
+            'r': CommandRight(self.rover),
+            't': CommandTopLef(self.rover)
         }
 
     def execute(self,commandString):

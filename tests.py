@@ -1,6 +1,7 @@
 import unittest
 from rover import Rover
 from remote_control import RemoteControl
+from map import Map
 
 from rover import Position as P
 
@@ -155,6 +156,35 @@ class RoverTest(unittest.TestCase):
         self.assertEqual(rover.get_position().x, 2)
         self.assertEqual(rover.get_position().y, 2)
 
+    def test_command_top_left_from_E(self):
+        map = Map(10,10)
+        rover = Rover(P(0,0),'E',map)
+
+        control = RemoteControl(rover)
+        control.execute('t')
+
+        self.assertEqual(rover.get_position().x, 10)
+        self.assertEqual(rover.get_position().y, 10)
+
+    def test_command_top_left_from_S(self):
+        map = Map(10,10)
+        rover = Rover(P(0,0),'S',map)
+
+        control = RemoteControl(rover)
+        control.execute('t')
+
+        self.assertEqual(rover.get_position().x, 10)
+        self.assertEqual(rover.get_position().y, 10)
+
+    def test_command_top_left_diferent_grid(self):
+        map = Map(10,20)
+        rover = Rover(P(0,0),'N',map)
+
+        control = RemoteControl(rover)
+        control.execute('t')
+
+        self.assertEqual(rover.get_position().x, 10)
+        self.assertEqual(rover.get_position().y, 20)
 
 if __name__ == '__main__':
     unittest.main()

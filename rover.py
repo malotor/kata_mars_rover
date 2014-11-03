@@ -20,6 +20,14 @@ class RoverAspectNorth:
     def turn_right(self):
         self.rover.set_aspect("E")
 
+    def top_left(self):
+        map = self.rover.get_map()
+        position = self.rover.get_position()
+        self.rover.go_forward()
+        if ( position.y == map.limitVertical ):
+            self.rover.turn_right()
+
+
 class RoverAspectSouth:
     def __init__(self,rover):
         self.rover = rover
@@ -35,6 +43,10 @@ class RoverAspectSouth:
 
     def turn_right(self):
         self.rover.set_aspect("W")
+
+    def top_left(self):
+        self.turn_left();
+
 
 
 class RoverAspectEast:
@@ -53,6 +65,14 @@ class RoverAspectEast:
     def turn_right(self):
         self.rover.set_aspect("S")
 
+    def top_left(self):
+        position = self.rover.get_position()
+        map = self.rover.get_map()
+        self.rover.go_forward()
+        if ( position.x == map.limitHorizontal ):
+            self.rover.turn_left()
+
+
 class RoverAspectWest:
     def __init__(self,rover):
         self.rover = rover
@@ -69,11 +89,15 @@ class RoverAspectWest:
     def turn_right(self):
         self.rover.set_aspect("N")
 
+    def top_left(self):
+        self.turn_right();
+
 class Rover:
 
-    def __init__(self,position,aspect):
+    def __init__(self,position,aspect,map = None):
         self.position = position
-        self.set_aspect(aspect);
+        self.set_aspect(aspect)
+        self.map = map
 
     def get_position(self):
         return self.position
@@ -97,6 +121,12 @@ class Rover:
     def turn_right(self):
         self.state.turn_right()
 
+    def top_left(self):
+        position = self.get_position()
+        map = self.get_map()
+        while (position.x < map.limitHorizontal) or (position.y < map.limitVertical):
+            self.state.top_left()
+
     def set_aspect_state(self,aspect):
 
         aspects = {
@@ -106,3 +136,6 @@ class Rover:
             'W': RoverAspectWest(self)
         }
         return aspects[aspect]
+
+    def get_map(self):
+        return self.map
