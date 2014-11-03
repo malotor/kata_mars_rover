@@ -176,15 +176,33 @@ class RoverTest(unittest.TestCase):
         self.assertEqual(rover.get_position().x, 10)
         self.assertEqual(rover.get_position().y, 10)
 
+    def test_map_with_obstaces(self):
+        map = Map(10,10)
+        map.set_obstacles([
+            P(2,2),
+            P(5,5),
+            P(5,6)
+        ])
+
+        self.assertTrue(map.is_free(P(0,0)))
+        self.assertFalse(map.is_free(P(2,2)))
+    '''
     def test_command_top_left_diferent_grid(self):
-        map = Map(10,20)
+        map = Map(10,10)
+        map.setObstacles([
+            P(2,2),
+            P(5,5),
+            p(5,6)
+        ])
+
         rover = Rover(P(0,0),'N',map)
 
         control = RemoteControl(rover)
         control.execute('t')
 
         self.assertEqual(rover.get_position().x, 10)
-        self.assertEqual(rover.get_position().y, 20)
+        self.assertEqual(rover.get_position().y, 10)
+    '''
 
 if __name__ == '__main__':
     unittest.main()

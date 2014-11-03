@@ -2,6 +2,12 @@ class Position:
     def __init__(self,x,y):
         self.x = x
         self.y = y
+        
+    def __str__(self):
+        return str(self.__dict__)
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
 
 
 class RoverAspectNorth:
@@ -126,6 +132,7 @@ class Rover:
         map = self.get_map()
         while (position.x < map.limitHorizontal) or (position.y < map.limitVertical):
             self.state.top_left()
+            self.print_position()
 
     def set_aspect_state(self,aspect):
 
@@ -139,3 +146,6 @@ class Rover:
 
     def get_map(self):
         return self.map
+
+    def print_position(self):
+        print 'Position:' + str(self.get_position().x) + ',' + str(self.get_position().y)
